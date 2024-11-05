@@ -10,6 +10,7 @@
   --light-primary: rgb(204, 204, 240);
   --light-secondary: rgb(173, 173, 238);
   --light-tertiary: rgb(119, 119, 189);
+  --shadow-color: rgba(119, 119, 189, .3);
 }
 
 body {
@@ -45,13 +46,32 @@ section {
   width: 100%;
 }
 
-input {
+.input-group {
   width: 100%;
-  height: 56px;
-  border-radius: 10px;
   padding: 0 16px;
-  outline: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: var(--light-tertiary) 1px solid;
+  border-radius: 10px;
+  background: var(--light-primary);
+
+  input {
+    width: 100%;
+    height: 56px;
+    outline: none;
+    border: none;
+    background: transparent;
+  }
+
+  button {
+    outline: none;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
 }
+
 
 #results {
   display: flex;
@@ -63,4 +83,16 @@ input {
 
 i {
   color: var(--light-tertiary);
+}
+
+.card {
+  width: 100%;
+  padding: 16px;
+  border: var(--light-tertiary) 1px solid;
+  border-radius: 4px;
+  transition: box-shadow 300ms ease-in-out;
+
+  &:hover {
+    box-shadow: 0 0 32px 4px var(--shadow-color);
+  }
 }

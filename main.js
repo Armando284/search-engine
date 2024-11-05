@@ -7,6 +7,7 @@ const $ = (tag) => document.querySelector(tag)
 const $searchInput = $('#search-input')
 const $results = $('#results')
 const $cardTemplate = $('#card-template')
+const $searchClear = $('#search-clear')
 
 const debouncer = (fn, delay) => {
   let timeoutId
@@ -22,6 +23,12 @@ const debouncer = (fn, delay) => {
 
 $searchInput.oninput = (e) => {
   debouncer(searchData, 300)(e.target.value)
+}
+
+$searchClear.onclick = (e) => {
+  e.preventDefault()
+  $searchInput.value = ''
+  renderData(data)
 }
 
 const includes = (haystack, needle) => {
