@@ -3,18 +3,29 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Engine</title>
+    <title>Movie Search Engine</title>
     <link rel="stylesheet" href="style.css">
     <script type="module" src="main.js"></script>
   </head>
   <body>
     <main>
-      <h1>Search Engine</h1>
+      <h1>Movie Search Engine</h1>
       <section>
         <form id="search-form">
-          <input type="text" id="search-param" placeholder="Search param...">
+          <input type="text" id="search-input" placeholder="Search param...">
         </form>
       </section>
+      <section id="results">
+
+      </section>
     </main>
+
+    <template id="card-template">
+      <div class="card">
+        <h3 class="card-title">Title</h3>
+        <i class="card-date">date</i>
+        <p class="card-description">description</p>
+      </div>
+    </template>
   </body>
 </html>

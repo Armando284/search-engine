@@ -9,6 +9,7 @@
   --dark-primary: #111;
   --light-primary: rgb(204, 204, 240);
   --light-secondary: rgb(173, 173, 238);
+  --light-tertiary: rgb(119, 119, 189);
 }
 
 body {
@@ -19,7 +20,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 64px;
+  padding: 32px;
+  overflow-x: hidden;
 }
 
 h1,
@@ -49,4 +51,16 @@ input {
   border-radius: 10px;
   padding: 0 16px;
   outline: none;
+}
+
+#results {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+i {
+  color: var(--light-tertiary);
 }
