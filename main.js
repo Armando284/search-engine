@@ -41,27 +41,36 @@ const includes = (haystack, needle) => {
 
 // Función que filtra `data` según el parámetro de búsqueda ingresado
 const searchData = (searchParam) => {
+  const t0 = performance.now()
   const filterData = data.filter(movie =>
     includes(movie.title, searchParam) || // Verifica si el título contiene el parámetro de búsqueda
     includes(movie.short_description, searchParam) || // Verifica si la descripción contiene el parámetro
     includes(movie.release_date, searchParam) // Verifica si la fecha de lanzamiento contiene el parámetro
   )
-  renderData(filterData) // Renderiza los datos filtrados
+  renderData(filterData, searchParam) // Renderiza los datos filtrados
+  console.log('Searched in %i milliseconds.', performance.now() - t0)
 }
 
 // Función que renderiza las tarjetas en pantalla
-const renderData = (data) => {
-  $results.replaceChildren() // Limpia el contenedor de resultados antes de renderizar
+// con resaltado de coincidencias
+const renderData = (data, searchParam) => {
+  $results.replaceChildren();
   data.forEach(movie => {
-    const cardClone = $cardTemplate.content.cloneNode(true) // Clona el template de tarjeta
-    cardClone.querySelector('.card-title').textContent = movie.title // Establece el título de la tarjeta
-    cardClone.querySelector('.card-date').textContent = movie.release_date // Establece la fecha
-    cardClone.querySelector('.card-description').textContent = movie.short_description // Establece la descripción
-    $results.appendChild(cardClone) // Agrega la tarjeta clonada al contenedor de resultados
-  })
-}
+    const cardClone = $cardTemplate.content.cloneNode(true);
 
-  // Función principal que realiza el primer renderizado; es una IIFE (Inmediatly Invoked Function Expression)
-  ; (function () {
-    renderData(data) // Renderiza todos los datos al cargar la página
-  })()
+    // Resaltar coincidencias en los textos
+    const highlightMatch = (text) =>
+      text.replace(new RegExp(`(${searchParam})`, 'gi'), '<mark>$1</mark>');
+
+    cardClone.querySelector('.card-title').innerHTML = highlightMatch(movie.title);
+    cardClone.querySelector('.card-date').innerHTML = highlightMatch(movie.release_date);
+    cardClone.querySelector('.card-description').innerHTML = highlightMatch(movie.short_description);
+
+    $results.appendChild(cardClone);
+  });
+};
+
+// Función principal que realiza el primer renderizado; es una IIFE (Inmediatly Invoked Function Expression)
+; (function () {
+  renderData(data) // Renderiza todos los datos al cargar la página
+})()
