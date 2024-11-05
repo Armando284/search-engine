@@ -42,11 +42,13 @@ const includes = (haystack, needle) => {
 // Función que filtra `data` según el parámetro de búsqueda ingresado
 const searchData = (searchParam) => {
   const t0 = performance.now()
-  const filterData = data.filter(movie =>
-    includes(movie.title, searchParam) || // Verifica si el título contiene el parámetro de búsqueda
-    includes(movie.short_description, searchParam) || // Verifica si la descripción contiene el parámetro
-    includes(movie.release_date, searchParam) // Verifica si la fecha de lanzamiento contiene el parámetro
-  )
+  // const filterData = data.filter(movie =>
+  //   includes(movie.title, searchParam) || // Verifica si el título contiene el parámetro de búsqueda
+  //   includes(movie.short_description, searchParam) || // Verifica si la descripción contiene el parámetro
+  //   includes(movie.release_date, searchParam) // Verifica si la fecha de lanzamiento contiene el parámetro
+  // )
+
+  const filterData = trie.search(searchParam)
   renderData(filterData, searchParam) // Renderiza los datos filtrados
   console.log('Searched in %i milliseconds.', performance.now() - t0)
 }
@@ -69,6 +71,61 @@ const renderData = (data, searchParam) => {
     $results.appendChild(cardClone);
   });
 };
+
+// Trie para almacenar y buscar palabras
+class TrieNode {
+  constructor() {
+    this.children = {};
+    this.isEndOfWord = false;
+    this.movies = []; // lista de películas asociadas a esta palabra
+  }
+}
+
+class Trie {
+  constructor() {
+    this.root = new TrieNode();
+  }
+
+  insert(word, movie) {
+    let node = this.root;
+    for (const char of word.toLowerCase()) {
+      if (!node.children[char]) {
+        node.children[char] = new TrieNode();
+      }
+      node = node.children[char];
+    }
+    node.isEndOfWord = true;
+    node.movies.push(movie); // Asocia el nodo final con la película
+  }
+
+  search(prefix) {
+    let node = this.root;
+    for (const char of prefix.toLowerCase()) {
+      if (!node.children[char]) {
+        return [];
+      }
+      node = node.children[char];
+    }
+    return this.collectMovies(node);
+  }
+
+  collectMovies(node) {
+    let results = [];
+    if (node.isEndOfWord) results.push(...node.movies);
+    for (const child in node.children) {
+      results.push(...this.collectMovies(node.children[child]));
+    }
+    return results;
+  }
+}
+
+// Crear el Trie e insertar los datos
+const trie = new Trie();
+data.forEach(movie => {
+  trie.insert(movie.title, movie);
+  trie.insert(movie.short_description, movie);
+  trie.insert(movie.release_date, movie);
+});
 
 // Función principal que realiza el primer renderizado; es una IIFE (Inmediatly Invoked Function Expression)
 ; (function () {
