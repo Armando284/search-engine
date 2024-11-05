@@ -1,3 +1,4 @@
+/* Establece todos los márgenes y padding en 0, y usa `border-box` para el box-sizing de todos los elementos */
 * {
   margin: 0;
   padding: 0;
@@ -5,94 +6,124 @@
 }
 
 :root {
+  /* Define la fuente por defecto y varias variables de color */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   --dark-primary: #111;
+  /* Color de fondo oscuro */
   --light-primary: rgb(204, 204, 240);
+  /* Color claro principal */
   --light-secondary: rgb(173, 173, 238);
+  /* Color secundario */
   --light-tertiary: rgb(119, 119, 189);
+  /* Color terciario */
   --shadow-color: rgba(119, 119, 189, .3);
+  /* Color de sombra translúcido */
 }
 
 body {
+  /* Tamaño del viewport y estilo de diseño del body */
   width: 100dvw;
   min-height: 100dvh;
   background: var(--dark-primary);
+  /* Fondo oscuro usando la variable */
   color: var(--light-secondary);
+  /* Color del texto por defecto */
   display: flex;
+  /* Centra el contenido principal horizontalmente */
   justify-content: center;
   align-items: flex-start;
   padding: 32px;
+  /* Añade espacio alrededor del contenido */
   overflow-x: hidden;
+  /* Oculta el desbordamiento horizontal */
 }
 
 h1,
 h2,
 h3 {
   color: var(--light-primary);
+  /* Títulos con un color más claro */
 }
 
 main {
+  /* Contenedor principal */
   width: 100%;
   max-width: 80ch;
+  /* Define el ancho máximo en caracteres (ch) */
   padding: 32px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   gap: 32px;
+  /* Espacio entre los elementos hijos */
 }
 
 section {
   width: 100%;
+  /* Cada sección ocupa el ancho completo del main */
 }
 
 .input-group {
+  /* Estilos para el contenedor del input y botón */
   width: 100%;
   padding: 0 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border: var(--light-tertiary) 1px solid;
+  /* Borde usando el color terciario */
   border-radius: 10px;
+  /* Bordes redondeados */
   background: var(--light-primary);
-
-  input {
-    width: 100%;
-    height: 56px;
-    outline: none;
-    border: none;
-    background: transparent;
-  }
-
-  button {
-    outline: none;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-  }
+  /* Fondo claro para contraste */
 }
 
+.input-group input {
+  width: 100%;
+  /* Input ocupa todo el espacio disponible */
+  height: 56px;
+  outline: none;
+  /* Remueve el borde del focus */
+  border: none;
+  background: transparent;
+  /* Fondo transparente para mezclar con el fondo del contenedor */
+}
+
+.input-group button {
+  outline: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  /* Cambia el cursor para indicar que es clicable */
+}
 
 #results {
+  /* Contenedor para los resultados de la búsqueda */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   gap: 16px;
+  /* Espacio entre cada resultado */
 }
 
 i {
   color: var(--light-tertiary);
+  /* Color para los elementos <i>, como fechas */
 }
 
 .card {
+  /* Estilos para las tarjetas de resultados */
   width: 100%;
   padding: 16px;
   border: var(--light-tertiary) 1px solid;
   border-radius: 4px;
   transition: box-shadow 300ms ease-in-out;
+  /* Transición para el efecto hover */
 
   &:hover {
+    /* Sombra suave al pasar el ratón sobre la tarjeta */
     box-shadow: 0 0 32px 4px var(--shadow-color);
   }
 }

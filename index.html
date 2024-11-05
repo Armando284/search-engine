@@ -6,27 +6,38 @@
     <title>Movie Search Engine</title>
     <link rel="stylesheet" href="style.css">
     <script type="module" src="main.js"></script>
+    <!-- Carga un script de JavaScript en modo "module", lo que permite usar importaciones y exportaciones -->
   </head>
   <body>
     <main>
-      <h1>Movie Search Engine</h1>
+      <h1>Movie Search Engine</h1> <!-- Título principal de la página -->
+
       <section>
+        <!-- Formulario de búsqueda donde el usuario ingresa el parámetro de búsqueda -->
         <form id="search-form">
           <div class="input-group">
+            <!-- Campo de entrada de texto donde el usuario escribe el parámetro de búsqueda -->
             <input type="text" id="search-input" placeholder="Search param...">
+            <!-- Botón de limpiar: al hacer clic, se espera que borre el texto en el campo de entrada -->
             <button id="search-clear">&#10006;</button>
+            <!-- Carácter especial "×" usado para indicar borrar/limpiar -->
           </div>
         </form>
       </section>
-      <section id="results">
 
+      <section id="results">
+        <!-- Este es el contenedor donde aparecerán los resultados de la búsqueda; inicialmente está vacío -->
       </section>
     </main>
 
+    <!-- Template para las tarjetas de resultados de la película -->
     <template id="card-template">
       <div class="card">
+        <!-- Título de la película. Se usará JavaScript para reemplazar este texto de ejemplo -->
         <h3 class="card-title">Title</h3>
+        <!-- Fecha de lanzamiento de la película -->
         <i class="card-date">date</i>
+        <!-- Breve descripción de la película -->
         <p class="card-description">description</p>
       </div>
     </template>
