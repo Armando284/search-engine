@@ -30,7 +30,7 @@ Este proyecto implementa un motor de búsqueda para películas. Permite a los us
 
 ### Uso del Trie (Opcional)
 
-Si deseas experimentar con una búsqueda más eficiente, hay una implementación de Trie en la rama `trie-implementation`. Un Trie permite realizar búsquedas por prefijo de manera más rápida, lo que es útil para autocompletar y mejorar el rendimiento de búsqueda en grandes conjuntos de datos.
+Si deseas experimentar con una búsqueda más eficiente, hay una implementación de Trie en la rama `feature/trie`. Un Trie permite realizar búsquedas por prefijo de manera más rápida, lo que es útil para autocompletar y mejorar el rendimiento de búsqueda en grandes conjuntos de datos.
 
 ## Cómo Ejecutar el Proyecto
 
